@@ -1,0 +1,3 @@
+package com.eureka.authenticationservice.api.authentication.service
+
+internal class AuthenticationUserDetailServiceTest

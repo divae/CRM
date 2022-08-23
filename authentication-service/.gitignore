@@ -36,8 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
-### Intellig ###
-.idea/
-
 ### Properties ###
 /src/main/resources/application.properties
