@@ -3,6 +3,7 @@
 ## Technology stack
 - Spring Boot 2.7.3-RELEASE
 - Spring Data JPA
+- Spring Mockk 3.1.1
 - Java 17
 - kotlin 1.7
 - MySQL – 8.0

@@ -1,6 +1,7 @@
 package com.eureka.authenticationservice.api.user.controller
 
 import com.eureka.authenticationservice.api.user.model.User
+import com.eureka.authenticationservice.api.user.model.response.UserCreateResponse
 import com.eureka.authenticationservice.api.user.service.UserService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.mockk.MockKAnnotations
@@ -53,6 +54,8 @@ internal class UserControllerTest {
             .andReturn().response
         
         assertEquals(response.status, HttpStatus.CREATED.value())
-        assertEquals(user, jacksonObjectMapper().readValue(response.contentAsString, User::class.java))
+        assertEquals(user.toUserCreateResponse(), jacksonObjectMapper().readValue(response.contentAsString, UserCreateResponse::class.java))
     }
+
+    //TODO when user is registered 409 conflict
 }

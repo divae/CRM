@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository : JpaRepository<UserDto, Long> {
     fun findByUsername(username: String): User?
-
-    fun save(userDto: UserDto): User
+    
+    fun save(userDto: UserDto): UserDto
 }

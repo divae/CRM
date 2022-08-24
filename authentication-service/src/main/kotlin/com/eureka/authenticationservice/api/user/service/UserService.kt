@@ -28,6 +28,6 @@ class UserService(
             passwordEncoder.encode(user.password),
             user.role
         )
-        return userRepository.save(encoderUser)
+        return userRepository.save(encoderUser).toUser()
     }
 }

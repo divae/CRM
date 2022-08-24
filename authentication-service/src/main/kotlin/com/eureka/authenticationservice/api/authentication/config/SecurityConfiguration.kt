@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 class SecurityConfiguration(
     private val bCryptPasswordEncoder: BCryptPasswordEncoder,
     private val authenticationUserDetailService: AuthenticationUserDetailService
-) : WebSecurityConfigurerAdapter() {
+) : WebSecurityConfigurerAdapter() { // TODO look this https://codejava.net/frameworks/spring-boot/fix-websecurityconfigureradapter-deprecated#:~:text=The%20type%20WebSecurityConfigurerAdapter%20is%20deprecated%20So%2C%20why%20Spring,users%20to%20move%20towards%20a%20component-based%20security%20configuration.
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {

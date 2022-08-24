@@ -56,7 +56,7 @@ internal class UserServiceTest {
         val user = User(id = null, username = username, password = "123456", role = "ADMIN")
         every { userRepository.findByUsername(username) } returns null
         every { passwordEncoder.encode(user.password)} returns "123456"
-        every { userRepository.save(any())} returns user
+        every { userRepository.save(any())} returns user.toUserDto()
 
         assertEquals(user, userService.createUser(user))
     }

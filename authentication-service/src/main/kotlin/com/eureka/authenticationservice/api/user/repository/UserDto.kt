@@ -1,5 +1,6 @@
 package com.eureka.authenticationservice.api.user.repository
 
+import com.eureka.authenticationservice.api.user.model.User
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.Table
@@ -15,4 +16,6 @@ class UserDto(
     val username: String,
     val password: String,
     val role: String
-)
+) {
+    fun toUser() = User(id, username, password, role)
+}
