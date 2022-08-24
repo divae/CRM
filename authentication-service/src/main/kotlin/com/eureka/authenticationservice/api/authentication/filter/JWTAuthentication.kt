@@ -5,7 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm
 import java.util.*
 
 class JWTAuthentication {
-    companion object{
+    companion object {
         fun token(username: String, date: Date, role: String, secret: ByteArray): String = JWT.create()
             .withSubject(username)
             .withClaim("role", role)

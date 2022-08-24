@@ -1,9 +1,9 @@
 package com.eureka.authenticationservice.api.user.service
 
 
-import com.eureka.authenticationservice.utilities.UserAlreadyRegistered
 import com.eureka.authenticationservice.api.user.model.User
 import com.eureka.authenticationservice.api.user.repository.UserRepository
+import com.eureka.authenticationservice.utilities.UserAlreadyRegistered
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 

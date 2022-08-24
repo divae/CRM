@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test
 
 class AuthenticationServiceApplicationTests {
 
-	@Test
-	fun contextLoads() {
-		assertTrue(true)
-	}
+    @Test
+    fun contextLoads() {
+        assertTrue(true)
+    }
 
 }

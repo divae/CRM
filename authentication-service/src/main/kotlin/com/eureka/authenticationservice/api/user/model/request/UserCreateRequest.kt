@@ -7,5 +7,5 @@ data class UserCreateRequest(
     val password: String,
     val role: String
 ) {
-    fun toUser(): User = User(null,username,password,role)
+    fun toUser(): User = User(null, username, password, role)
 }

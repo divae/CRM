@@ -1,8 +1,8 @@
 package com.eureka.authenticationservice.api.user.service
 
-import com.eureka.authenticationservice.utilities.UserAlreadyRegistered
 import com.eureka.authenticationservice.api.user.model.User
 import com.eureka.authenticationservice.api.user.repository.UserRepository
+import com.eureka.authenticationservice.utilities.UserAlreadyRegistered
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals

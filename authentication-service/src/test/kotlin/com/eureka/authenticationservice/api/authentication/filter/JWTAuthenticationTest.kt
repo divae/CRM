@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 import java.util.*
 
 
-internal class JWTAuthenticationTest{
+internal class JWTAuthenticationTest {
     @Test
     fun token() {
         val date = Date(1111111)

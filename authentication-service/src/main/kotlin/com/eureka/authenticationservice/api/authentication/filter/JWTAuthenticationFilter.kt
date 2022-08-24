@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse
 
 class JWTAuthenticationFilter(
     authenticationManager: AuthenticationManager
-): UsernamePasswordAuthenticationFilter(authenticationManager) {
+) : UsernamePasswordAuthenticationFilter(authenticationManager) {
 
     @Throws(AuthenticationException::class)
     override fun attemptAuthentication(request: HttpServletRequest, response: HttpServletResponse): Authentication {
@@ -46,10 +46,10 @@ class JWTAuthenticationFilter(
             (auth.principal as User).username,
             auth.authorities.iterator().next().authority
         )
-        response.contentType = "application/json";
-        response.characterEncoding = "UTF-8";
+        response.contentType = "application/json"
+        response.characterEncoding = "UTF-8"
         response.writer.write(
             "{\"$token\"}"
-        );
+        )
     }
 }
