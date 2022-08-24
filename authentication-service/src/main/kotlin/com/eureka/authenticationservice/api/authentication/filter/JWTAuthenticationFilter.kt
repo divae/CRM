@@ -2,6 +2,7 @@ package com.eureka.authenticationservice.api.authentication.filter
 
 import com.eureka.authenticationservice.api.authentication.config.AuthenticationConfigConstants
 import com.eureka.authenticationservice.api.user.model.User
+import com.eureka.authenticationservice.api.user.repository.UserDto
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -22,7 +23,7 @@ class JWTAuthenticationFilter(
     @Throws(AuthenticationException::class)
     override fun attemptAuthentication(request: HttpServletRequest, response: HttpServletResponse): Authentication {
         return try {
-            val credentials = ObjectMapper().readValue(request.inputStream, User::class.java)
+            val credentials = ObjectMapper().readValue(request.inputStream, UserDto::class.java)
             authenticationManager!!.authenticate(
                 UsernamePasswordAuthenticationToken(
                     credentials.username,

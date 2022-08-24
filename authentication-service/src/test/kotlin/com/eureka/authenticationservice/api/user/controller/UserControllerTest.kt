@@ -7,7 +7,7 @@ import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
-import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.http.HttpStatus
@@ -43,7 +43,7 @@ internal class UserControllerTest {
             password = "000",
             role = "ADMIN"
         )
-        every { userService.createUser(user) } returns Unit
+        every { userService.createUser(any()) } returns user
 
         val response: MockHttpServletResponse = mvc.perform(
             post("/api/user")
@@ -51,7 +51,8 @@ internal class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
         )
             .andReturn().response
-
-        assertThat(response.status).isEqualTo(HttpStatus.OK.value())
+        
+        assertEquals(response.status, HttpStatus.CREATED.value())
+        assertEquals(user, jacksonObjectMapper().readValue(response.contentAsString, User::class.java))
     }
 }

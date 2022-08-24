@@ -4,6 +4,7 @@ import com.eureka.authenticationservice.api.user.model.User
 import com.eureka.authenticationservice.api.user.repository.UserRepository
 import com.eureka.authenticationservice.utilities.UserAlreadyRegistered
 import io.mockk.every
+import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 internal class UserServiceTest {
     private val userRepository: UserRepository = mockk()
     private val passwordEncoder: BCryptPasswordEncoder = mockk()
+    @InjectMockKs
     private val userService = UserService(userRepository, passwordEncoder)
 
     @Test
@@ -46,5 +48,16 @@ internal class UserServiceTest {
         val exception = assertThrows<UserAlreadyRegistered> { userService.createUser(user) }
 
         assertEquals("User already registered. Please use different username.", exception.message)
+    }
+
+    @Test
+    fun `Given user unregistered When createUser Then retrieve it`() {
+        val username = "User1"
+        val user = User(id = null, username = username, password = "123456", role = "ADMIN")
+        every { userRepository.findByUsername(username) } returns null
+        every { passwordEncoder.encode(user.password)} returns "123456"
+        every { userRepository.save(any())} returns user
+
+        assertEquals(user, userService.createUser(user))
     }
 }
