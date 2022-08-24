@@ -33,3 +33,5 @@ Customer
 - Customer crud by admin and user
 
 Test: Acceptation test for users registration
+
+Security: Do not expose the passwords of docker-compose and application.properties
