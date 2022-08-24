@@ -9,7 +9,9 @@ class AuthenticationConfigConstants {
         const val EXPIRATION_TIME: Long = 864000000 // 10 days
         const val TOKEN_PREFIX = "Bearer "
         const val HEADER_STRING = "Authorization"
-        fun bearerToken(username: String, role: String) = TOKEN_PREFIX + JWTAuthentication.token(
+        fun bearerToken(username: String, role: String) = TOKEN_PREFIX + token(username, role)
+
+        fun token(username: String, role: String) = JWTAuthentication.token(
             username,
             Date(System.currentTimeMillis() + EXPIRATION_TIME),
             role,
