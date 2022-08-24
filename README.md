@@ -14,8 +14,22 @@
 ## Services
 
 ### Authorization service
-Service responsible for Authentication
+Backoffice service for customer management.
 
 ### Test in local
 TODO generate file to autorun
 
+### Implemented
+- Users registration
+
+### TODO
+- Login
+Users
+- Only admin should create users
+- List all users by admin
+- Delete user by admin
+- Patch user by admin
+Customer
+- Customer crud by admin and user
+
+Test: Acceptation test for users registration
