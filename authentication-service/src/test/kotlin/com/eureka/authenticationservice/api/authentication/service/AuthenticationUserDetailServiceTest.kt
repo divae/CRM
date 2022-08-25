@@ -1,5 +1,6 @@
 package com.eureka.authenticationservice.api.authentication.service
 
+import com.eureka.authenticationservice.api.user.model.Role
 import com.eureka.authenticationservice.api.user.model.User
 import com.eureka.authenticationservice.api.user.service.UserService
 import com.eureka.authenticationservice.utilities.UserUnregisteredException
@@ -20,7 +21,7 @@ internal class AuthenticationUserDetailServiceTest{
     @Test
     fun  `Given user registered when loadUserByUsername`(){
         val username = "User1"
-        val user = User(id = Long.MAX_VALUE, username = username, password = "pass", role = "ADMIN")
+        val user = User(id = Long.MAX_VALUE, username = username, password = "pass", roles = arrayListOf(Role.ADMIN))
         every { userService.readUserByUsername(username) } returns user
 
         assertEquals(user.username, authenticationService.loadUserByUsername(username).username)

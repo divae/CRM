@@ -1,5 +1,6 @@
 package com.eureka.authenticationservice.api.authentication.filter
 
+import com.eureka.authenticationservice.api.user.model.Role
 import com.eureka.authenticationservice.api.user.model.request.UserCreateRequest
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.mockk.every
@@ -20,11 +21,11 @@ internal class JWTAuthenticationFilterTest {
     private val jWTAuthenticationFilter = JWTAuthenticationFilter(authenticationManager)
     private val request = MockHttpServletRequest()
     private val response = MockHttpServletResponse()
-    private val user = UserCreateRequest("User1", "pass", "ADMIN")
+    private val user = UserCreateRequest("User1", "pass", listOf(Role.ADMIN))
     private val fakeUsernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(
         "principal",
         "credentials",
-        listOf(SimpleGrantedAuthority("user"))
+        listOf(SimpleGrantedAuthority("ADMIN"))
     )
 
     @Test

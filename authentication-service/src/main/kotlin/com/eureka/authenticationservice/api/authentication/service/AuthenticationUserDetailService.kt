@@ -17,7 +17,7 @@ class AuthenticationUserDetailService(
         User(
             it.username,
             it.password,
-            getAuthorities(it.role)
+            getAuthorities(it.roles.toString())
         )
     } ?: throw UserUnregisteredException(username)
 

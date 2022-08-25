@@ -1,6 +1,8 @@
 package com.eureka.authenticationservice.api.user.controller
 
+import com.eureka.authenticationservice.api.user.model.Role
 import com.eureka.authenticationservice.api.user.model.User
+import com.eureka.authenticationservice.api.user.model.request.UserCreateRequest
 import com.eureka.authenticationservice.api.user.model.response.UserCreateResponse
 import com.eureka.authenticationservice.api.user.service.UserService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -39,22 +41,32 @@ internal class UserControllerTest {
     @Test
     fun canRetrieveByNameWhenExists() {
         val user = User(
-            id = null,
+            id = 1,
             username = "User1",
             password = "000",
-            role = "ADMIN"
+            roles = arrayListOf(Role.ADMIN)
         )
+
+        val userRequest = UserCreateRequest(
+            username = user.username,
+            password = user.password,
+            roles = user.roles
+        )
+
         every { userService.createUser(any()) } returns user
 
         val response: MockHttpServletResponse = mvc.perform(
             post("/api/user")
-                .content(jacksonObjectMapper().writeValueAsString(user))
+                .content(jacksonObjectMapper().writeValueAsString(userRequest))
                 .contentType(MediaType.APPLICATION_JSON)
         )
             .andReturn().response
-        
-        assertEquals(response.status, HttpStatus.CREATED.value())
-        assertEquals(user.toUserCreateResponse(), jacksonObjectMapper().readValue(response.contentAsString, UserCreateResponse::class.java))
+
+        assertEquals(HttpStatus.CREATED.value(), response.status)
+        assertEquals(
+            jacksonObjectMapper().readValue(response.contentAsString, UserCreateResponse::class.java),
+            user.toUserCreateResponse()
+        )
     }
 
     //TODO when user is registered 409 conflict
