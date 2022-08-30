@@ -26,7 +26,7 @@ class UserService(
             null,
             user.username,
             passwordEncoder.encode(user.password),
-            user.role
+            ArrayList(user.roles)
         )
         return userRepository.save(encoderUser).toUser()
     }

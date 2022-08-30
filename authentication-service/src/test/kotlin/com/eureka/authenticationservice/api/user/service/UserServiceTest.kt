@@ -1,5 +1,6 @@
 package com.eureka.authenticationservice.api.user.service
 
+import com.eureka.authenticationservice.api.user.model.Role
 import com.eureka.authenticationservice.api.user.model.User
 import com.eureka.authenticationservice.api.user.repository.UserRepository
 import com.eureka.authenticationservice.utilities.UserAlreadyRegistered
@@ -21,7 +22,7 @@ internal class UserServiceTest {
     @Test
     fun `Given user registered When readUserByUsername Then retrieve user`() {
         val username = "User1"
-        val user = User(id = Long.MAX_VALUE, username = username, password = "pass", role = "ADMIN")
+        val user = User(id = Long.MAX_VALUE, username = username, password = "pass", roles = arrayListOf(Role.USER, Role.ADMIN))
         every { userRepository.findByUsername(username) } returns user
 
         val userRegistered = userService.readUserByUsername(username)
@@ -42,7 +43,7 @@ internal class UserServiceTest {
     @Test
     fun `Given user registered When createUser Then UserException`() {
         val username = "User1"
-        val user = User(id = Long.MAX_VALUE, username = username, password = "pass", role = "ADMIN")
+        val user = User(id = Long.MAX_VALUE, username = username, password = "pass", roles = arrayListOf(Role.ADMIN))
         every { userRepository.findByUsername(username) } returns user
 
         val exception = assertThrows<UserAlreadyRegistered> { userService.createUser(user) }
@@ -53,7 +54,7 @@ internal class UserServiceTest {
     @Test
     fun `Given user unregistered When createUser Then retrieve it`() {
         val username = "User1"
-        val user = User(id = null, username = username, password = "123456", role = "ADMIN")
+        val user = User(id = null, username = username, password = "123456", roles = arrayListOf(Role.ADMIN))
         every { userRepository.findByUsername(username) } returns null
         every { passwordEncoder.encode(user.password)} returns "123456"
         every { userRepository.save(any())} returns user.toUserDto()

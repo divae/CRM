@@ -7,8 +7,8 @@ data class User(
     val id: Long?,
     val username: String,
     val password: String,
-    val role: String
+    val roles: List<Role>
 ) {
-    fun toUserDto() = UserDto(id, username, password, role)
+    fun toUserDto() = UserDto(id, username, password, ArrayList(roles))
     fun toUserCreateResponse() = UserCreateResponse(id!!, username)
 }
